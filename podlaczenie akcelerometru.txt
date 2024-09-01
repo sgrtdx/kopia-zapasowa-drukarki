@@ -1,0 +1,29 @@
+GND+MISO		brązowy + biało brązowy
+3.3V+MOSI		pomarańczowy + biało pomarańczowy
+SCLK+CS			niebieski + biało niebieski
+
+connector:
+pomarańczowy -> zółty
+biało pomarańczowy -> biały
+biało brązowy -> niebieski
+brązowy -> czerwony
+niebieski -> zielony
+biało niebieski -> czarny
+
+ADXL345 pin	RPi pin	RPi pin name
+3V3 (or VCC)	01	  3.3V DC power
+GND	            06	  Ground
+CS	            24    GPIO08 (SPI0_CE0_N)
+SDO	            21	  GPIO09 (SPI0_MISO)
+SDA	            19	  GPIO10 (SPI0_MOSI)
+SCL	            23	  GPIO11 (SPI0_SCLK)
+
+aktualizacja mcu:
+sudo service klipper stop
+cd ~/klipper
+git pull
+make clean
+make menuconfig
+make
+./scripts/flash-sdcard.sh /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0 creality-v4.2.2
+sudo service klipper start
